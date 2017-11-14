@@ -14,3 +14,10 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+// Bootstrap dependencies
+//= require jquery3
+//= require popper
+//= require bootstrap-sprockets
+
+//= require quagga.min
