@@ -20,4 +20,4 @@
 //= require popper
 //= require bootstrap-sprockets
 
-//= require quagga.min
+//= require instascan.min
