@@ -5,6 +5,14 @@
   
   .row
     .col-xs-12
+      - if flash[:warning]
+        .alert.alert-warning= flash[:warning]
+
       %p Place the barcode in front of the camera so it's completely in view.
+
       %video#barcode-capture
       %h3#barcode-result
+
+      #build-list-form
+        = form_tag build_list_path do
+          = hidden_field_tag :vendor_part_id
