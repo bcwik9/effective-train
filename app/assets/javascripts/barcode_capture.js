@@ -1,7 +1,7 @@
 $(function() {
     let scanner = new Instascan.Scanner({ video: document.getElementById('barcode-capture') });
     scanner.addListener('scan', function (content) {
-        console.log(content);
+        $("#barcode-result").text(content)
     });
     Instascan.Camera.getCameras().then(function (cameras) {
         if (cameras.length > 0) {
