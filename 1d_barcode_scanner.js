@@ -3,11 +3,7 @@ $(function() {
         inputStream : {
             name : "Live",
             type : "LiveStream",
-            target: document.querySelector('#quagga'),
-            constraints: {
-                zoom: 2.0,
-                advanced: [{zoom: 2.0}]
-            }
+            target: document.querySelector('#quagga')
         },
         decoder : {
             readers : ["ean_reader"]
@@ -19,6 +15,10 @@ $(function() {
         }
         console.log("Quagga initialization finished. Ready to start");
         Quagga.start();
+        const track = Quagga.CameraAccess.getActiveTrack()
+        sleep(5000)
+        var capabilities = track.getCapabilities()
+        track.applyConstraints({ advanced: [{zoom: capabilities.zoom.max}]})
     });
 
     Quagga.onProcessed(function(result) {
