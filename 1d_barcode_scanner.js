@@ -1,22 +1,24 @@
-$(function() {
-    var last_result = undefined
-    
-    var set_zoom = function(){
+// 1D barcode scanner. Not for 2D/QR barcodes
+
+var barcode_scanner_app = {
+    last_result: undefined,
+   
+    set_zoom: function(){
         if(capabilities["zoom"]){
             track.applyConstraints({ advanced: [{zoom: capabilities.zoom.max}]})
         } else {
             console.log("Zoom not supported")   
         }
-    }
+    },
   
-    var get_capabilities_and_restart = function(){
+    get_capabilities_and_restart: function(){
         capabilities = track.getCapabilities()
         Quagga.stop()
         // restart with max zoom and resolution
-        quagga_init(false, capabilities["width"]["max"], capabilities["height"]["max"])
-    }
+        self.quagga_init(false, capabilities["width"]["max"], capabilities["height"]["max"])
+    },
     
-    var quagga_init = function(set_defaults, resolution_width, resolution_height){
+    quagga_init: function(set_defaults, resolution_width, resolution_height){
         var camera_id = undefined
         Quagga.CameraAccess.enumerateVideoDevices().then(function(cameras) {
           camera_id = cameras[cameras.length - 1]["deviceId"]
@@ -48,15 +50,15 @@ $(function() {
             Quagga.start();
             if(set_defaults){
                 track = Quagga.CameraAccess.getActiveTrack()
-                setTimeout(get_capabilities_and_restart, 2000)
+                setTimeout(self.get_capabilities_and_restart, 2000)
             } else {
-                set_zoom()
+                self.set_zoom()
             }
         });
-    }
+    },
     
-    var init = function(){
-        quagga_init(true, 640, 480)
+    init: function(){
+        self.quagga_init(true, 640, 480)
         
         Quagga.onProcessed(function(result) {
             var drawingCtx = Quagga.canvas.ctx.overlay,
@@ -84,10 +86,10 @@ $(function() {
 
         Quagga.onDetected(function(result) {
             var code = result.codeResult.code;
-            if (last_result !== code) {
+            if (self.last_result !== code) {
                 console.log("Quagga result:")
                 console.log(result)
-                last_result = code;
+                self.last_result = code;
                 var canvas = Quagga.canvas.dom.image;
                 var node = $('<li><div class="thumbnail"><div class="imgWrapper"><img /></div><div class="caption"><h4 class="code"></h4></div></div></li>');
                 node.find("img").attr("src", canvas.toDataURL());
@@ -96,6 +98,4 @@ $(function() {
             }
         });
     }
-    
-    init()
-})
+}
