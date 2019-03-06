@@ -1,4 +1,5 @@
 $(function() {
+    var last_result = undefined
     var set_zoom = function(){
         var capabilities = track.getCapabilities()
         if(capabilities["zoom"]){
@@ -54,18 +55,15 @@ $(function() {
 
     Quagga.onDetected(function(result) {
         var code = result.codeResult.code;
-        
-        if (App.lastResult !== code) {
+        if (last_result !== code) {
             console.log("Quagga result:")
             console.log(result)
-
-            App.lastResult = code;
-            var $node = null, canvas = Quagga.canvas.dom.image;
-            
-            $node = $('<li><div class="thumbnail"><div class="imgWrapper"><img /></div><div class="caption"><h4 class="code"></h4></div></div></li>');
-            $node.find("img").attr("src", canvas.toDataURL());
-            $node.find("h4.code").html(code);
-            $("#result_strip ul.thumbnails").prepend($node);
+            last_result = code;
+            var canvas = Quagga.canvas.dom.image;
+            var node = $('<li><div class="thumbnail"><div class="imgWrapper"><img /></div><div class="caption"><h4 class="code"></h4></div></div></li>');
+            node.find("img").attr("src", canvas.toDataURL());
+            node.find("h4.code").html(code);
+            $("#result_strip ul.thumbnails").prepend(node);
         }
     });
 })
