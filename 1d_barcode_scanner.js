@@ -58,6 +58,8 @@ var barcode_scanner_app = {
     },
     
     init: function(){
+        console.log(self)
+        console.log(this)
         self.quagga_init(true, 640, 480)
         
         Quagga.onProcessed(function(result) {
