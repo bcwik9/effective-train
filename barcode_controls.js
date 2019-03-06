@@ -1,5 +1,5 @@
 $(function(){
-  $("#barcode-controls").change(function(e){
+  $("#barcode-selector").change(function(e){
     console.log(e)
   })
 })
