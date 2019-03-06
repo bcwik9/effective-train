@@ -25,7 +25,7 @@ $(function() {
         console.log("Quagga initialization finished. Ready to start");
         Quagga.start();
         track = Quagga.CameraAccess.getActiveTrack()
-        setTimeout(set_zoom, 5000)
+        setTimeout(set_zoom, 2000)
     });
 
     Quagga.onProcessed(function(result) {
