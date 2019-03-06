@@ -4,7 +4,7 @@ scanner.addListener('scan', function (content) {
   $("#barcode-result").text(content)
 });
 Instascan.Camera.getCameras().then(function (cameras) {
-  console.log("Found cameras!")
+  console.log("Looking for cameras")
   console.log(cameras)
   if (cameras.length > 0) {
     scanner.start(cameras[cameras.length - 1]);
