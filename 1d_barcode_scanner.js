@@ -1,4 +1,9 @@
 $(function() {
+    var set_zoom = function(){
+        var capabilities = track.getCapabilities()
+        track.applyConstraints({ advanced: [{zoom: capabilities.zoom.max}]})
+    }
+    
     Quagga.init({
         inputStream : {
             name : "Live",
@@ -16,9 +21,7 @@ $(function() {
         console.log("Quagga initialization finished. Ready to start");
         Quagga.start();
         const track = Quagga.CameraAccess.getActiveTrack()
-        sleep(5000)
-        var capabilities = track.getCapabilities()
-        track.applyConstraints({ advanced: [{zoom: capabilities.zoom.max}]})
+        setTimeout(set_zoom, 5000)
     });
 
     Quagga.onProcessed(function(result) {
