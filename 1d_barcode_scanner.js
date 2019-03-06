@@ -1,7 +1,11 @@
 $(function() {
     var set_zoom = function(){
         var capabilities = track.getCapabilities()
-        track.applyConstraints({ advanced: [{zoom: capabilities.zoom.max}]})
+        if(capabilities["zoom"]){
+            track.applyConstraints({ advanced: [{zoom: capabilities.zoom.max}]})
+        } else {
+            console.log("Zoom not supported")   
+        }
     }
     
     Quagga.init({
