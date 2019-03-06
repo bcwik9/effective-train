@@ -19,4 +19,4 @@ var qr_barcode_scanner_app = {
       console.error(e);
     });
   }
-})
+}
