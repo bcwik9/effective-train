@@ -15,7 +15,7 @@ var barcode_scanner_app = {
         capabilities = track.getCapabilities()
         Quagga.stop()
         // restart with max zoom and resolution
-        self.quagga_init(false, capabilities["width"]["max"], capabilities["height"]["max"])
+        this.quagga_init(false, capabilities["width"]["max"], capabilities["height"]["max"])
     },
     
     quagga_init: function(set_defaults, resolution_width, resolution_height){
@@ -50,17 +50,15 @@ var barcode_scanner_app = {
             Quagga.start();
             if(set_defaults){
                 track = Quagga.CameraAccess.getActiveTrack()
-                setTimeout(self.get_capabilities_and_restart, 2000)
+                setTimeout(this.get_capabilities_and_restart, 2000)
             } else {
-                self.set_zoom()
+                this.set_zoom()
             }
         });
     },
     
     init: function(){
-        console.log(self)
-        console.log(this)
-        self.quagga_init(true, 640, 480)
+        this.quagga_init(true, 640, 480)
         
         Quagga.onProcessed(function(result) {
             var drawingCtx = Quagga.canvas.ctx.overlay,
@@ -88,10 +86,10 @@ var barcode_scanner_app = {
 
         Quagga.onDetected(function(result) {
             var code = result.codeResult.code;
-            if (self.last_result !== code) {
+            if (this.last_result !== code) {
                 console.log("Quagga result:")
                 console.log(result)
-                self.last_result = code;
+                this.last_result = code;
                 var canvas = Quagga.canvas.dom.image;
                 var node = $('<li><div class="thumbnail"><div class="imgWrapper"><img /></div><div class="caption"><h4 class="code"></h4></div></div></li>');
                 node.find("img").attr("src", canvas.toDataURL());
