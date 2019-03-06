@@ -2,7 +2,7 @@ var qr_barcode_scanner_app = {
   init: function(){
     let scanner = new Instascan.Scanner({
       video: document.getElementById('barcode-capture'),
-      scanPeriod: 3
+      scanPeriod: 2
     });
     scanner.addListener('scan', function (content) {
       $("#barcode-result").text(content)
