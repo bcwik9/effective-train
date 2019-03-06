@@ -3,7 +3,11 @@ $(function() {
         inputStream : {
             name : "Live",
             type : "LiveStream",
-            target: document.querySelector('#quagga')
+            target: document.querySelector('#quagga'),
+            constraints: {
+                zoom: 2.0,
+                advanced: {zoom: 2.0}
+            }
         },
         decoder : {
             readers : ["ean_reader"]
