@@ -1,5 +1,8 @@
 $(function(){
-  let scanner = new Instascan.Scanner({ video: document.getElementById('barcode-capture') });
+  let scanner = new Instascan.Scanner({
+    video: document.getElementById('barcode-capture'),
+    scanPeriod: 3
+  });
   scanner.addListener('scan', function (content) {
     $("#barcode-result").text(content)
   });
