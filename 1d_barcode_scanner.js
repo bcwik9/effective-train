@@ -17,12 +17,17 @@ $(function() {
     }
     
     var quagga_init = function(set_defaults, resolution_width, resolution_height){
+        var camera_id = undefined
+        Quagga.CameraAccess.enumerateVideoDevices().then(function(cameras) {
+          camera_id = cameras[cameras.length - 1]["deviceId"]
+        })
         Quagga.init({
             inputStream : {
                 name : "Live",
                 type : "LiveStream",
                 target: document.querySelector('#quagga'),
                 constraints: {
+                    deviceId: camera_id,
                     width: {
                         min: resolution_width
                     },
