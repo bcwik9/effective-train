@@ -1,1 +1,1 @@
-A simple javascript QR code reader https://bcwik9.github.io/effective-train/
+A simple javascript barcode reader https://bcwik9.github.io/effective-train/
